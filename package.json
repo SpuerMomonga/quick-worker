@@ -4,7 +4,7 @@
   "type": "module",
   "author": "spuermomonga",
   "scripts": {
-    "build:sw": "pnpm -F simple-worker build",
+    "build:sw": "pnpm -F quick-worker build",
     "example:vite": "pnpm -F example-vite dev"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-# simple-worker
+# quick-worker
 
 ## 技术指标
 

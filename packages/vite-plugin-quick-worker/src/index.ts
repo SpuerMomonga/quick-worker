@@ -1,9 +1,7 @@
 import type { PluginOption } from 'vite';
 
-interface SimpleWorkerOptions {
-
-}
+interface SimpleWorkerOptions {}
 
 export function createSimpleWorkerPlugin(options: SimpleWorkerOptions = {}): PluginOption {
-  return { name: 'vite:simple-worker', configResolved: () => { }, config: () => { } }
+  return { name: 'vite:quick-worker', configResolved: () => {}, config: () => {} };
 }

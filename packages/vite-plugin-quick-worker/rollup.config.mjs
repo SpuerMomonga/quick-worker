@@ -6,7 +6,7 @@ function config({ format, input = 'index', output = 'index', ext = 'js' }) {
   return {
     input: `./src/${input}.ts`,
     output: {
-      name: 'SimpleWorkerPlugin',
+      name: 'QuickWorkerPlugin',
       file: `./dist/${output}.${ext}`,
       format,
       sourcemap: true,

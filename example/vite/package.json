@@ -8,6 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "quick-worker": "workspace:*"
+  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "svelte": "^5.28.2",

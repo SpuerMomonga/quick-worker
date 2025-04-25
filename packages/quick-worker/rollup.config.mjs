@@ -9,7 +9,7 @@ function config({ format, minify, input = 'index', output = 'index', ext = 'js' 
   return {
     input: `./src/${input}.ts`,
     output: {
-      name: 'SimpleWorker',
+      name: 'QuickWorker',
       file: `./dist/${output}${minifierSuffix}.${ext}`,
       format,
       sourcemap: true,
@@ -42,7 +42,7 @@ export default defineConfig(
     { format: 'esm', minify: true, ext: 'mjs' },
     { format: 'umd', minify: false },
     { format: 'umd', minify: true },
-    { output: 'simple-worker', format: 'umd', minify: false },
-    { output: 'simple-worker', format: 'umd', minify: true },
+    { output: 'quick-worker', format: 'umd', minify: false },
+    { output: 'quick-worker', format: 'umd', minify: true },
   ].map(config),
 );

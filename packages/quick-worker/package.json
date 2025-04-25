@@ -1,11 +1,11 @@
 {
-  "name": "simple-worker",
+  "name": "quick-worker",
   "version": "0.0.1",
   "author": "spuermomonga",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "browser": "dist/simple-worker.js",
+  "browser": "dist/quick-worker.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
@@ -22,14 +22,14 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2"
   },
-  "homepage": "https://github.com/SpuerMomonga/simple-worker/packages/simple-worker",
+  "homepage": "https://github.com/SpuerMomonga/quick-worker/packages/quick-worker",
   "repository": {
     "type": "git",
     "url": "https://github.com/SpuerMomonga/bmapgl.git",
-    "directory": "packages/simple-worker"
+    "directory": "packages/quick-worker"
   },
   "keywords": [
     "worker",
-    "simple-worker"
+    "quick-worker"
   ]
 }
