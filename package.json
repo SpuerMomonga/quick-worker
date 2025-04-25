@@ -1,0 +1,22 @@
+{
+  "name": "root",
+  "private": true,
+  "type": "module",
+  "author": "spuermomonga",
+  "scripts": {
+    "build:sw": "pnpm -F simple-worker build",
+    "example:vite": "pnpm -F example-vite dev"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@types/node": "^22.15.0",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.40.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0"
+  }
+}
