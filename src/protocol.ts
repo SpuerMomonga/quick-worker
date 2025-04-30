@@ -49,21 +49,21 @@ export interface ApplyMessage {
   id?: MessageID;
   type: MessageType.APPLY;
   path: string[];
-  args: WireValue[];
+  argumentList: WireValue[];
 }
 
 export interface RunMessage {
   id?: MessageID;
   type: MessageType.RUN;
   fn: string;
-  args: WireValue[];
+  argumentList: WireValue[];
 }
 
 export interface ConstructMessage {
   id?: MessageID;
   type: MessageType.CONSTRUCT;
   path: string[];
-  args: WireValue[];
+  argumentList: WireValue[];
 }
 
 export interface EndpointMessage {

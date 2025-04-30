@@ -7,13 +7,6 @@
   "module": "dist/index.mjs",
   "browser": "dist/quick-worker.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "scripts": {
     "build": "rollup -c",
     "build:vpsw": "pnpm -F vite-plugin-quick-worker build",

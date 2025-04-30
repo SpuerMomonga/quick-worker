@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "comlink": "^4.4.2",
     "quick-worker": "workspace:*"
   },
   "devDependencies": {

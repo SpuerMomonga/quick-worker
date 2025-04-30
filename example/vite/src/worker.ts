@@ -1,4 +1,4 @@
-import { expose } from 'quick-worker';
+import { expose } from 'comlink';
 
 const count = 10;
 

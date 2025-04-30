@@ -73,6 +73,10 @@ function processArguments(argumentList: any[]): [WireValue[], Transferable[]] {
 }
 
 const transferCache = new WeakMap<any, Transferable[]>();
+export function transfer<T>(obj: T, transfers: Transferable[]): T {
+  transferCache.set(obj, transfers);
+  return obj;
+}
 
 /**
  * 创建一个Worker链接池
@@ -99,17 +103,13 @@ export function createPool<T = any>(script?: Script, options?: WorkerPoolOptions
   return createProxy<T>(pool);
 }
 
-function createProxy<T = any>(
-  pool: WorkerPool,
-  path: (string | number | symbol)[] = [],
-  target: object = function () {},
-) {
+function createProxy<T>(pool: WorkerPool, path: (string | number | symbol)[] = [], target: object = function () {}) {
   const proxy = new Proxy(target, {
     get(_target, p) {
       console.log(_target, p, 'get ---------------> ');
       if (p === 'then') {
         console.log(path);
-        const r = pool.execute({ type: MessageType.GET, path: path.map((p) => p.toString()) });
+        const r = pool.execute({ type: MessageType.GET, path: path.map((p) => p.toString()) }).then(fromWireValue);
         return r.then.bind(r);
       }
       return createProxy(pool, [...path, p]);
@@ -118,11 +118,13 @@ function createProxy<T = any>(
       console.log(_target, p, newValue, 'set ---------------> ');
       return true;
     },
-    apply(_target, thisArg, args) {
-      console.log(_target, thisArg, args, 'apply ---------------> ');
+    apply(_target, thisArg, rawArgumentList) {
+      console.log(_target, thisArg, rawArgumentList, 'apply ---------------> ');
       const last = path[path.length - 1];
       if (last === 'execute') {
-        // pool.execute({type: MessageType.RUN,args})
+        const fn = rawArgumentList.shift();
+        const [argumentList, transferables] = processArguments(rawArgumentList);
+        pool.execute({ type: MessageType.RUN, argumentList, fn: `${String(fn)}` }, transferables);
         return;
       }
     },

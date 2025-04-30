@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { createPool } from 'quick-worker';
-  // @ts-ignore
+  import { wrap } from 'comlink';
+  // @ts-expect-error
   import url from './worker?url&worker';
 
-  const pool = createPool(url, { workerOpts: { type: 'module' } });
+  const worker = new Worker(url, { type: 'module' });
+
+  const obj = wrap<{ count: number }>(worker);
 
   async function init() {
-    console.log(await pool.count);
+    console.log(await obj.count);
   }
 
   init();
