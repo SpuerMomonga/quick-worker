@@ -134,7 +134,9 @@ export class WorkerPool {
   }
 
   #createWorkerHandler() {
-    return new WorkerHandler(this.#script, this.#workerOpts);
+    const worker = new WorkerHandler(this.#script, this.#workerOpts);
+    this.#onCreateWorker(worker.getWorkerID());
+    return worker;
   }
 
   terminate() {}

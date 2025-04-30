@@ -1,30 +1,23 @@
 import { Endpoint, Message } from './protocol';
-import { createDefer, Deferred } from './utils';
+import { createDefer, Deferred, generateUUID } from './utils';
 
 export type FnWorker = new () => Worker;
 export type WorkerInstance = Worker | MessagePort;
 export type Script = string | URL | FnWorker | WorkerInstance;
 
 export class WorkerHandler {
+  #workerID: string;
   #worker: Endpoint;
   #requestQueue: string[];
 
   #terminated: boolean;
   #processing: Map<string, Deferred>;
+  #tracking: Set<Deferred>;
   #lastId: number;
 
   constructor(script?: Script, options?: WorkerOptions) {
-    if (script instanceof Worker || script instanceof MessagePort) {
-      this.#worker = script;
-    } else if (typeof script === 'string' || script instanceof URL) {
-      this.#worker = new Worker(script, options);
-    } else if (typeof script === 'function') {
-      this.#worker = new script();
-    } else {
-      this.#worker = new Worker(getDefaultWorker(), options);
-    }
-
-    console.log(this.#worker);
+    this.#worker = createWorker();
+    this.#workerID = generateUUID();
 
     this.#worker.addEventListener('message', (ev: Event) => {
       if (this.#terminated) {
@@ -46,7 +39,9 @@ export class WorkerHandler {
     });
 
     this.#worker.addEventListener('error', (e) => {
-      console.log(e);
+      this.#terminated = true;
+      this.#processing.forEach((value) => value.reject(e));
+      this.#processing.clear();
     });
 
     this.#terminated = false;
@@ -75,6 +70,10 @@ export class WorkerHandler {
     return resolver.promise;
   }
 
+  getWorkerID() {
+    return this.#workerID;
+  }
+
   busy() {
     return this.#processing.size > 0;
   }
@@ -82,7 +81,40 @@ export class WorkerHandler {
   terminate(force: boolean = false, callback?: () => void) {
     if (force) {
       this.#processing.forEach((value) => value.reject(new Error('Worker terminated')));
+      this.#processing.clear();
     }
+
+    if (!this.busy()) {
+      if (this.#worker) {
+        if (this.#worker.terminate) {
+          this.#worker.terminate();
+        }
+      }
+    }
+  }
+}
+
+function createWorker(script?: Script, options?: WorkerOptions) {
+  ensureWebWorker();
+  if (script instanceof Worker || script instanceof MessagePort) {
+    return script;
+  } else if (typeof script === 'string' || script instanceof URL) {
+    return new Worker(script, options);
+  } else if (typeof script === 'function') {
+    return new script();
+  } else {
+    return new Worker(getDefaultWorker(), options);
+  }
+}
+
+function ensureWebWorker() {
+  // Workaround for a bug in PhantomJS (Or QtWebkit): https://github.com/ariya/phantomjs/issues/14534
+  if (
+    typeof Worker !== 'function' &&
+    // @ts-expect-error TS error
+    (typeof Worker !== 'object' || typeof Worker.prototype.constructor !== 'function')
+  ) {
+    throw new Error('QuickWorker: Web Workers not supported');
   }
 }
 

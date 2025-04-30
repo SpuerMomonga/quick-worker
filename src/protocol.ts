@@ -92,5 +92,6 @@ export interface EventSource {
 
 export interface Endpoint extends EventSource {
   postMessage(message: any, transfer?: Transferable[]): void;
+  terminate?: () => void;
   start?: () => void;
 }
