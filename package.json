@@ -4,7 +4,8 @@
   "type": "module",
   "author": "spuermomonga",
   "scripts": {
-    "build:sw": "pnpm -F quick-worker build",
+    "build:qw": "pnpm -F quick-worker build",
+    "build:vpsw": "pnpm -F vite-plugin-quick-worker build",
     "example:vite": "pnpm -F example-vite dev"
   },
   "devDependencies": {

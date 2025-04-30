@@ -1,5 +1,4 @@
 import { defineConfig } from 'rollup';
-// import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 import { sync } from 'rimraf';

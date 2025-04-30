@@ -23,6 +23,7 @@ export default tsEslint.config(
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      '@typescript-eslint/no-explicit-any': 'off',
       semi: ['error', 'always'],
     },
   },

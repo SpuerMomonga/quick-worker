@@ -20,7 +20,8 @@
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^12.1.2"
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup-plugin-string-import": "^1.2.5"
   },
   "homepage": "https://github.com/SpuerMomonga/quick-worker/packages/quick-worker",
   "repository": {
