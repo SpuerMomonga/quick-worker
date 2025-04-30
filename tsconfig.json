@@ -17,5 +17,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "include": ["src/**/*.ts", "src/**/*.js", "example/**/*.ts", "example/**/*.js", "rollup.config.mjs"],
   "exclude": ["node_modules"]
 }

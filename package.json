@@ -1,16 +1,30 @@
 {
-  "name": "root",
-  "private": true,
-  "type": "module",
+  "name": "quick-worker",
+  "version": "0.0.1",
   "author": "spuermomonga",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "browser": "dist/quick-worker.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
-    "build:qw": "pnpm -F quick-worker build",
+    "build": "rollup -c",
     "build:vpsw": "pnpm -F vite-plugin-quick-worker build",
     "example:vite": "pnpm -F example-vite dev"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
     "@types/node": "^22.15.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
@@ -19,5 +33,15 @@
     "rollup": "^4.40.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.0"
-  }
+  },
+  "homepage": "https://github.com/SpuerMomonga/quick-worker/packages/quick-worker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpuerMomonga/bmapgl.git",
+    "directory": "packages/quick-worker"
+  },
+  "keywords": [
+    "worker",
+    "quick-worker"
+  ]
 }

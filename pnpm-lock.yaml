@@ -11,6 +11,15 @@ importers:
       '@eslint/js':
         specifier: ^9.25.1
         version: 9.25.1
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.26.10)(rollup@4.40.0)
+      '@rollup/plugin-terser':
+        specifier: ^0.4.4
+        version: 0.4.4(rollup@4.40.0)
+      '@rollup/plugin-typescript':
+        specifier: ^12.1.2
+        version: 12.1.2(rollup@4.40.0)(tslib@2.8.1)(typescript@5.8.3)
       '@types/node':
         specifier: ^22.15.0
         version: 22.15.0
@@ -43,7 +52,7 @@ importers:
     dependencies:
       quick-worker:
         specifier: workspace:*
-        version: link:../../packages/quick-worker
+        version: link:../..
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
@@ -57,34 +66,6 @@ importers:
       vite:
         specifier: ^6.3.3
         version: 6.3.3(@types/node@22.15.0)(terser@5.39.0)
-
-  packages/quick-worker:
-    devDependencies:
-      '@rollup/plugin-babel':
-        specifier: ^6.0.4
-        version: 6.0.4(@babel/core@7.26.10)(rollup@4.40.0)
-      '@rollup/plugin-terser':
-        specifier: ^0.4.4
-        version: 0.4.4(rollup@4.40.0)
-      '@rollup/plugin-typescript':
-        specifier: ^12.1.2
-        version: 12.1.2(rollup@4.40.0)(tslib@2.8.1)(typescript@5.8.3)
-      rollup-plugin-string-import:
-        specifier: ^1.2.5
-        version: 1.2.5(rollup@4.40.0)
-
-  packages/vite-plugin-quick-worker:
-    dependencies:
-      vite:
-        specifier: '>=2.0.0'
-        version: 6.3.3(@types/node@22.15.0)(terser@5.39.0)
-    devDependencies:
-      '@rollup/plugin-babel':
-        specifier: ^6.0.4
-        version: 6.0.4(@babel/core@7.26.10)(rollup@4.40.0)
-      '@rollup/plugin-typescript':
-        specifier: ^12.1.2
-        version: 12.1.2(rollup@4.40.0)(tslib@2.8.1)(typescript@5.8.3)
 
 packages:
 
@@ -1163,11 +1144,6 @@ packages:
     resolution: {integrity: sha512-9dkvaxAsk/xNXSJzMgFqqMCuFgt2+KsOFek3TMLfo8NCPfWpBmqwyNn5Y+NX56QUYfCtsyhF3ayiboEoUmJk/A==}
     engines: {node: 20 || >=22}
     hasBin: true
-
-  rollup-plugin-string-import@1.2.5:
-    resolution: {integrity: sha512-soVwp0sWcAaN1tFthAGGBx5eQy94iAo2xozYVxyKH/WNHZiN2dJjUTlfdJkZWNXQY5e4333/lbImapski70tdA==}
-    peerDependencies:
-      rollup: 4.20.0
 
   rollup@4.40.0:
     resolution: {integrity: sha512-Noe455xmA96nnqH5piFtLobsGbCij7Tu+tb3c1vYjNbTkfzGqXqQXG3wJaYXkRZuQ0vEYN4bhwg7QnIrqB5B+w==}
@@ -2373,11 +2349,6 @@ snapshots:
     dependencies:
       glob: 11.0.2
       package-json-from-dist: 1.0.1
-
-  rollup-plugin-string-import@1.2.5(rollup@4.40.0):
-    dependencies:
-      '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
-      rollup: 4.40.0
 
   rollup@4.40.0:
     dependencies:
